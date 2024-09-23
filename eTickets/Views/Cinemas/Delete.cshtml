@@ -1,0 +1,104 @@
+﻿@model Cinema
+
+@{
+    ViewData["Title"] = "Delete cinema";
+}
+
+<div class="row text">
+    <div class="col-md-8 offset-2">
+        <p>
+            <h1>Delete confirmation for @Model.Name</h1>
+        </p>
+        <div class="row">
+            <div class="col-md-8 offset-2">
+                <div class="form-group text-center">
+                    <img class="border-info rounded-circle" style="max-width: 150px" id="LogoPreview" />
+                </div>
+                <div class="form-group">
+                    <label asp-for="Logo" class="control-label"></label>
+                    <input asp-for="Logo" class="form-control" readonly />
+                    <span asp-validation-for="Logo" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Name" class="control-label"></label>
+                    <input asp-for="Name" class="form-control" readonly />
+                    <span asp-validation-for="Name" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Description" class="control-label"></label>
+                    <input asp-for="Description" class="form-control" readonly />
+                    <span asp-validation-for="Description" class="text-danger"></span>
+                </div>
+
+                <div class="form-group">
+                    <form asp-action="Delete">
+                        <input type="hidden" asp-for="Id" />
+                        <input type="submit" value="Confirm" class="btn btn-danger float-right" />
+                    </form>
+                    <a class="btn btn-outline-secondary" asp-action="Index">Show All</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<style>
+    /* Ngjyra e përgjithshme e sfondit */
+    body {
+        background-color: #000; /* Sfondi i zi */
+        color: #fff; /* Teksti i bardhë si ngjyrë e parazgjedhur */
+    }
+
+    /* Titulli */
+    h1 {
+        color: #FFA500; /* Portokalli */
+    }
+
+    /* Fushat e shkrimit */
+    .form-control {
+        background-color: #fff; /* Fushat e bardha */
+        color: #000; /* Teksti i zi */
+        border: 1px solid #ccc; /* Kufiri i lehtë për fushat */
+    }
+
+        /* Hiq hover efektin për fushat e shkrimit */
+        .form-control:focus {
+            outline: none; /* Hiq outline efektin */
+            box-shadow: none; /* Hiq shadow efektin */
+        }
+
+    /* Ngjyra e butonave */
+    .btn {
+        background-color: #FFA500; /* Portokalli */
+        color: #fff; /* Teksti i bardhë */
+    }
+
+        /* Hiq hover efektin për butonat */
+        .btn:hover, .btn:focus {
+            background-color: #FFA500; /* Portokalli e njëjtë si në hover */
+            color: #fff; /* Teksti i bardhë */
+            box-shadow: none; /* Hiq shadow efektin */
+        }
+
+    /* Ngjyra e butonave të tjera */
+    .btn-outline-secondary {
+        background-color: #FFA500; /* Portokalli */
+        border-color: #FFA500; /* Kufiri portokalli */
+        color: #fff; /* Teksti i bardhë */
+    }
+
+        /* Hiq hover efektin për butonat e tjera */
+        .btn-outline-secondary:hover, .btn-outline-secondary:focus {
+            background-color: #FFA500; /* Portokalli e njëjtë si në hover */
+            color: #fff; /* Teksti i bardhë */
+            box-shadow: none; /* Hiq shadow efektin */
+        }
+</style>
+
+@section Scripts {
+    <script>
+        $(document).ready(function () {
+            var output = document.getElementById('LogoPreview');
+            output.src = $("#Logo").val();
+        })
+    </script>
+}

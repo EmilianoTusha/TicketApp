@@ -1,0 +1,91 @@
+﻿@model Producer
+
+@{
+    ViewData["Title"] = "Details of the producer";
+}
+
+<div class="row text">
+    <div class="col-md-8 offset-2">
+        <p>
+            <h1>Details for @Model.FullName</h1>
+        </p>
+        <div class="row">
+            <div class="col-md-8 offset-2">
+                <div class="form-group text-center">
+                    <img class="border-info rounded-circle" style="max-width: 150px" id="ProfilePicturePreview" />
+                </div>
+                <div class="form-group">
+                    <label asp-for="ProfilePictureURL" class="control-label"></label>
+                    <input asp-for="ProfilePictureURL" class="form-control readonly-field" readonly />
+                    <span asp-validation-for="ProfilePictureURL" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="FullName" class="control-label"></label>
+                    <input asp-for="FullName" class="form-control readonly-field" readonly />
+                    <span asp-validation-for="FullName" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Bio" class="control-label"></label>
+                    <input asp-for="Bio" class="form-control readonly-field" readonly />
+                    <span asp-validation-for="Bio" class="text-danger"></span>
+                </div>
+
+                <div class="form-group">
+                    @if (User.Identity.IsAuthenticated && User.IsInRole("Admin"))
+                    {
+                        <a class="btn btn-custom float-right" asp-action="Edit" asp-route-id="@Model.Id">Edit</a>
+                    }
+                    <a class="btn btn-custom" asp-action="Index">Show All</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        $(document).ready(function () {
+            var output = document.getElementById('ProfilePicturePreview');
+            output.src = $("#ProfilePictureURL").val();
+        });
+    </script>
+}
+
+<style>
+    body {
+        background-color: black; /* Sfonda e zezë për të gjithë faqen */
+        color: white; /* Teksti bardhë */
+    }
+
+    .form-control {
+        background-color: #333; /* Fusha e hyrjes gri e errët */
+        color: white; /* Teksti bardhë në fushat e hyrjes */
+        border: 1px solid #555; /* Kufiri gri i errët */
+    }
+
+    .readonly-field {
+        background-color: #333; /* E njëjta ngjyrë si në Edit për fushat readonly */
+        color: black; /* Teksti bardhë */
+        border: 1px solid #555; /* Kufiri gri i errët */
+    }
+
+    .btn-custom {
+        color: white; /* Teksti bardhë për butonat */
+        background-color: orange; /* Sfonda portokalli për butonat */
+        border: 1px solid orange; /* Kufiri portokalli për butonat */
+    }
+
+        .btn-custom:hover {
+            background-color: orange; /* Ngjyra portokalli gjatë hover-it për butonat */
+            border: 1px solid orange; /* Kufiri portokalli gjatë hover-it për butonat */
+            color: white; /* Teksti bardhë gjatë hover-it për butonat */
+        }
+
+    h1 {
+        color: orange; /* Ngjyra portokalli për titullin */
+    }
+
+    label, .text-danger {
+        color: white; /* Teksti bardhë për etiketat dhe gabimet */
+    }
+</style>

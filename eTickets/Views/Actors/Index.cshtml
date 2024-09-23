@@ -1,0 +1,116 @@
+﻿@model IEnumerable<Actor>
+@{
+    ViewData["Title"] = "List of Actors";
+}
+
+<div class="row">
+    <div class="col-md-8 offset-md-2">
+        <table class="table custom-table">
+            <thead>
+                <tr>
+                    <th>@Html.DisplayNameFor(model => model.ProfilePictureURL)</th>
+                    <th>@Html.DisplayNameFor(model => model.FullName)</th>
+                    <th class="bio-column">@Html.DisplayNameFor(model => model.Bio)</th>
+                    @if (User.Identity.IsAuthenticated && User.IsInRole("Admin"))
+                    {
+                        <th>Actions</th>
+                    }
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td class="align-middle">
+                            <img class="rounded-circle" src="@item.ProfilePictureURL" alt="@item.FullName" style="max-width: 150px" />
+                        </td>
+                        <td class="align-middle">
+                            @Html.DisplayFor(modelItem => item.FullName)
+                        </td>
+                        <td class="align-middle bio-column">
+                            @Html.DisplayFor(modelItem => item.Bio)
+                        </td>
+                        @if (User.Identity.IsAuthenticated && User.IsInRole("Admin"))
+                        {
+                            <td class="align-middle">
+                                <a class="btn btn-custom-edit" asp-action="Edit" asp-route-id="@item.Id"><i class="bi bi-pencil-square"></i> Edit</a> |
+                                <a class="btn btn-custom-details" asp-action="Details" asp-route-id="@item.Id"><i class="bi bi-eye"></i> Details</a> |
+                                <a class="btn btn-custom-delete" asp-action="Delete" asp-route-id="@item.Id"><i class="bi bi-trash"></i> Delete</a>
+                            </td>
+                        }
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+<style>
+    body {
+        background-color: black; /* Sfondi i faqes i zi */
+        color: white; /* Ngjyra e tekstit */
+    }
+
+    .custom-table {
+        background-color: #2c2c2c; /* Sfondi i tabelës i zi */
+        color: white; /* Ngjyra e tekstit në tabelë */
+        width: 100%; /* Siguron që tabela të mbushë tërë hapësirën e disponueshme */
+    }
+
+        .custom-table thead {
+            background-color: white; /* Sfondi i kokës së tabelës i bardhë */
+        }
+
+            .custom-table thead th {
+                color: black; /* Teksti i kokës së tabelës i zi */
+                font-weight: bold; /* Teksti i kokës me peshë më të lartë */
+                border-bottom: 2px solid #555; /* Linja e poshtme për kokën e tabelës */
+            }
+
+        .custom-table tbody td {
+            vertical-align: middle; /* Qendron në mes vertikalisht */
+        }
+
+        .custom-table .bio-column {
+            max-width: 400px; /* Gjerësi maksimale për biografinë */
+            word-break: break-word; /* Thyen fjalët nëse janë shumë të gjata për hapësirë */
+        }
+
+    .btn-custom-edit,
+    .btn-custom-details,
+    .btn-custom-delete {
+        color: white; /* Teksti bardhë */
+    }
+
+    .btn-custom-edit {
+        background-color: orange; /* Butoni Edit portokalli */
+        border: 1px solid orange;
+    }
+
+    .btn-custom-details {
+        background-color: orange; /* Butoni Details portokalli */
+        border: 1px solid orange;
+    }
+
+    .btn-custom-delete {
+        background-color: red; /* Butoni Delete kuq */
+        border: 1px solid red;
+    }
+
+        .btn-custom-edit:hover,
+        .btn-custom-details:hover,
+        .btn-custom-delete:hover {
+            background-color: inherit; /* Pa ndryshim gjatë hover-it */
+            color: white; /* Teksti mbetet bardhë gjatë hover-it */
+        }
+
+    .table {
+        border-collapse: separate;
+        border-spacing: 0;
+    }
+
+        .table tbody tr:hover {
+            background-color: #444; /* Sfondi i rreshtave gjatë hover-it */
+        }
+</style>
+
+@await Html.PartialAsync("_CreateItem", "Actors")

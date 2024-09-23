@@ -1,0 +1,98 @@
+﻿@model Producer
+@{
+    ViewData["Title"] = "Update Producer";
+}
+
+<div class="row text">
+    <div class="col-md-8 offset-2">
+        <p>
+            <h1>Update Producer</h1>
+        </p>
+        <div class="row">
+            <div class="col-md-8 offset-2">
+                <form asp-action="Edit">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+                    <div class="form-group text-center">
+                        <img id="ProfilePicturePreview" class="border-info rounded-circle" style="max-width: 150px" />
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="ProfilePictureURL" class="control-label"></label>
+                        <input asp-for="ProfilePictureURL" class="form-control" />
+                        <span asp-validation-for="ProfilePictureURL" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="FullName" class="control-label"></label>
+                        <input asp-for="FullName" class="form-control" />
+                        <span asp-validation-for="FullName" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Bio" class="control-label"></label>
+                        <input asp-for="Bio" class="form-control" />
+                        <span asp-validation-for="Bio" class="text-danger"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <input type="submit" value="Update" class="btn btn-custom float-right" />
+                        <a class="btn btn-custom" asp-action="Index">Show All</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        $(document).ready(function () {
+            var output = document.getElementById('ProfilePicturePreview');
+            output.src = $("#ProfilePictureURL").val();
+        });
+
+        $("#ProfilePictureURL").on("change", function () {
+            var output = document.getElementById('ProfilePicturePreview');
+            output.src = $(this).val();
+        });
+    </script>
+}
+
+<style>
+    body {
+        background-color: black; /* Sfonda e zezë për të gjithë faqen */
+        color: white; /* Teksti bardhë në përgjithësi */
+    }
+
+    .form-control {
+        background-color: #333; /* Ngjyrë gri e errët për fushat e hyrjes */
+        color: white; /* Teksti bardhë në fushat e hyrjes */
+        border: 1px solid #555; /* Kufiri gri i errët */
+    }
+
+    .btn-custom {
+        color: white; /* Teksti bardhë për butonat */
+        background-color: orange; /* Sfonda portokalli për butonat */
+        border: 1px solid orange; /* Kufiri portokalli për butonat */
+    }
+
+        .btn-custom:hover {
+            background-color: orange; /* Sfonda portokalli gjatë hover për butonat */
+            border: 1px solid orange; /* Kufiri portokalli gjatë hover për butonat */
+            color: white; /* Teksti bardhë gjatë hover për butonat */
+        }
+
+    h1 {
+        color: orange; /* Titulli me ngjyrë portokalli */
+    }
+
+    label, .text-danger {
+        color: white; /* Teksti bardhë */
+    }
+
+    .form-group label {
+        color: white; /* Etiketa të bardha */
+    }
+
+    .table-dark thead th {
+        color: white; /* Teksti bardhë në kokën e tabelës */
+    }
+</style>

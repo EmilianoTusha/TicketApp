@@ -1,0 +1,33 @@
+﻿<style>
+    /* Sfondi i përgjithshëm i faqes */
+    body {
+        background-color: #000; /* Sfondi i zi për tërë faqen */
+    }
+
+    /* Sfondi i seksionit të specifikuar */
+    .row.text-center {
+        background-color: #000; /* Sfondi i zi për këtë seksion */
+        color: #FFA500; /* Teksti portokalli */
+        padding: 20px; /* Shtoni pak hapësirë rreth përmbajtjes */
+    }
+
+    /* Ngjyra e vijës (hr) */
+    hr {
+        border: 1px solid #FFA500; /* Vija portokalli */
+        width: 50%; /* Gjerësia e vijës */
+        margin: 20px auto; /* Qendron në qendër */
+    }
+
+    /* Ngjyra e titullit */
+    h1.text-info {
+        color: #FFA500; /* Teksti portokalli */
+    }
+</style>
+
+<div class="row text-center">
+    <div class="col-md-6 offset-3">
+        <h1 class="text-info">You've reached the end of the internet</h1>
+        <a class="btn btn-outline-success" asp-controller="Movies" asp-action="Index">Home Page</a>
+        <hr />
+    </div>
+</div>

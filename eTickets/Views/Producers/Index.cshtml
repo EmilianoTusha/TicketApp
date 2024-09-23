@@ -1,0 +1,101 @@
+﻿@model IEnumerable<Producer>
+@{
+    ViewData["Title"] = "List of Producers";
+}
+
+<div class="row">
+    <div class="col-md-8 offset-md-2">
+        <table class="table table-dark">
+            <thead class="table-header">
+                <tr class="text-center">
+                    <th>@Html.DisplayNameFor(model => model.ProfilePictureURL)</th>
+                    <th>@Html.DisplayNameFor(model => model.FullName)</th>
+                    <th>@Html.DisplayNameFor(model => model.Bio)</th>
+                    @if (User.Identity.IsAuthenticated && User.IsInRole("Admin"))
+                    {
+                        <th>Actions</th>
+                    }
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td class="align-middle">
+                            <img class="rounded-circle" src="@item.ProfilePictureURL" alt="@item.FullName" style="max-width: 150px" />
+                        </td>
+                        <td class="align-middle">
+                            @Html.DisplayFor(modelItem => item.FullName)
+                        </td>
+                        <td class="align-middle">
+                            @Html.DisplayFor(modelItem => item.Bio)
+                        </td>
+                        @if (User.Identity.IsAuthenticated && User.IsInRole("Admin"))
+                        {
+                            <td class="align-middle">
+                                <a class="btn btn-warning" asp-action="Edit" asp-route-id="@item.Id"><i class="bi bi-pencil-square"></i> Edit</a> |
+                                <a class="btn btn-warning" asp-action="Details" asp-route-id="@item.Id"><i class="bi bi-eye"></i> Details</a> |
+                                <a class="btn btn-danger" asp-action="Delete" asp-route-id="@item.Id"><i class="bi bi-trash"></i> Delete</a>
+                            </td>
+                        }
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+
+@await Html.PartialAsync("_CreateItem", "Producers")
+
+<style>
+    body {
+        background-color: black; /* Sfonda e zezë për të gjithë faqen */
+        color: white; /* Teksti bardhë si parazgjedhje */
+    }
+
+    .table-dark {
+        background-color: black; /* Sfondi i tabelës në zi */
+        color: white; /* Teksti në tabelë i bardhë */
+    }
+
+        .table-dark thead {
+            background-color: white; /* Sfondi i kokës së tabelës bardhë */
+        }
+
+            .table-dark thead th {
+                color: black; /* Teksti i kokës së tabelës zi */
+                font-weight: bold; /* Teksti i kokës me peshë më të lartë */
+            }
+
+        .table-dark tbody tr {
+            background-color: #222; /* Sfondi gri më i errët për rreshtat */
+        }
+
+            .table-dark tbody tr:nth-of-type(odd) {
+                background-color: #333; /* Sfondi gri i errët për rreshtat e çiftë */
+            }
+
+    .btn-warning {
+        color: white; /* Teksti bardhë për butonat portokalli */
+        background-color: orange; /* Sfonda portokalli për butonat portokalli */
+        border: 1px solid orange; /* Kufiri portokalli për butonat portokalli */
+    }
+
+        .btn-warning:hover {
+            background-color: orange; /* Sfonda portokalli gjatë hover për butonat portokalli */
+            border: 1px solid orange; /* Kufiri portokalli gjatë hover për butonat portokalli */
+            color: white; /* Teksti bardhë gjatë hover për butonat portokalli */
+        }
+
+    .btn-danger {
+        color: white; /* Teksti bardhë për butonat kuq */
+        background-color: red; /* Sfonda kuqe për butonat kuq */
+        border: 1px solid red; /* Kufiri kuq për butonat kuq */
+    }
+
+        .btn-danger:hover {
+            background-color: red; /* Sfonda kuqe gjatë hover për butonat kuq */
+            border: 1px solid red; /* Kufiri kuq gjatë hover për butonat kuq */
+            color: white; /* Teksti bardhë gjatë hover për butonat kuq */
+        }
+</style>

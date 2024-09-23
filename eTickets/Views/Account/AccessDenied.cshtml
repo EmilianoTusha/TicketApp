@@ -1,0 +1,59 @@
+﻿<div class="row">
+    <div class="col-md-6 offset-3 alert alert-custom text-center">
+        <h2>You are not allowed to access this page</h2>
+        <p>Please, click the button below to be redirected to the home page.</p>
+        <hr />
+        <p>
+            <a asp-controller="Movies" asp-action="Index" class="btn btn-home-page">Home Page</a>
+        </p>
+    </div>
+</div>
+
+<style>
+    /* Sfondi i zi për të gjithë faqen dhe shkrimi i bardhë */
+    body {
+        background-color: black;
+        color: white; /* Ngjyra e tekstit të bardhë */
+        font-family: Arial, sans-serif; /* Mund të ndryshoni këtë në bazë të preferencave */
+    }
+
+    /* Sfondi portokalli për katrorin me tekst të bardhë */
+    .alert-custom {
+        background-color: black; /* Sfondi i zi për katrorin */
+        color: white; /* Ngjyra e tekstit të bardhë */
+        border: 1px solid orange; /* Kufiri portokalli për kontrast */
+        padding: 20px;
+        border-radius: 0.5rem; /* Rrumbullakosja më e theksuar për një pamje më të butë */
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5); /* Hije për theksim */
+    }
+
+        .alert-custom h2 {
+            color: white; /* Ngjyra e titujve të bardhë në sfond të zi */
+            font-weight: bold;
+            margin-bottom: 10px; /* Distanca nën tituj */
+        }
+
+        .alert-custom hr {
+            border-top: 1px solid orange; /* Linja ndarëse portokalli për kontrast */
+            margin: 20px 0; /* Distanca mbi dhe nën linjën ndarëse */
+        }
+
+        .alert-custom p {
+            margin: 0; /* Heqja e distancës nga paragrafët për t'u integruar më mirë */
+        }
+
+    .btn-home-page {
+        background-color: orange; /* Sfondi portokalli për buton */
+        color: white; /* Ngjyra e tekstit të bardhë për buton */
+        border: none;
+        padding: 10px 20px;
+        border-radius: 0.25rem; /* Rrumbullakosja e butonit për një pamje më të butë */
+        text-decoration: none; /* Heqja e nënvizimit të tekstit në buton */
+        font-weight: bold;
+    }
+
+        .btn-home-page:hover {
+            background-color: darkorange; /* Ngjyra e ndryshuar për hover në buton */
+            color: white; /* Ngjyra e tekstit mbetet e bardhë gjatë hover */
+        }
+</style>

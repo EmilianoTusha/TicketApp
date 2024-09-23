@@ -1,0 +1,112 @@
+﻿@model Actor
+@{
+    ViewData["Title"] = "Update actor";
+}
+
+<div class="row text">
+    <div class="col-md-8 offset-2">
+        <h1 class="text-center">Update Actor</h1>
+        <div class="row">
+            <div class="col-md-8 offset-2">
+                <form asp-action="Edit">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+                    <div class="form-group text-center">
+                        <img id="ProfilePicturePreview" class="border-info rounded-circle" style="max-width: 150px" />
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="ProfilePictureURL" class="control-label"></label>
+                        <input asp-for="ProfilePictureURL" class="form-control" />
+                        <span asp-validation-for="ProfilePictureURL" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="FullName" class="control-label"></label>
+                        <input asp-for="FullName" class="form-control" />
+                        <span asp-validation-for="FullName" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Bio" class="control-label"></label>
+                        <input asp-for="Bio" class="form-control" />
+                        <span asp-validation-for="Bio" class="text-danger"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <input type="submit" value="Update" class="btn btn-custom float-right" />
+                        <a class="btn btn-custom" asp-action="Index">Show All</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        $(document).ready(function () {
+            var output = document.getElementById('ProfilePicturePreview');
+            output.src = $("#ProfilePictureURL").val();
+        })
+
+        $("#ProfilePictureURL").on("change", function () {
+            var output = document.getElementById('ProfilePicturePreview');
+            output.src = $(this).val();
+        })
+    </script>
+}
+
+<style>
+    body {
+        background-color: black; /* Sfonda e zezë për faqen */
+        color: white; /* Teksti bardhë si parazgjedhje */
+    }
+
+    .form-control {
+        background-color: white; /* Sfonda bardhë për fushat e inputit */
+        color: black; /* Teksti zi për fushat e inputit */
+        border: 1px solid #ccc; /* Kufiri i lehtë gri */
+    }
+
+        .form-control:focus {
+            background-color: white; /* Sfonda bardhë gjatë fokusit */
+            color: black; /* Teksti zi gjatë fokusit */
+            border-color: orange; /* Kufiri portokalli gjatë fokusit */
+            box-shadow: none; /* Pa hije gjatë fokusit */
+        }
+
+    .btn-custom {
+        background-color: orange; /* Butonat portokalli */
+        color: white; /* Teksti bardhë për butonat */
+        border: 1px solid orange; /* Kufiri portokalli për butonat */
+    }
+
+        .btn-custom:hover {
+            background-color: orange; /* Butonat portokalli gjatë hover */
+            color: white; /* Teksti bardhë gjatë hover */
+            border: 1px solid orange; /* Kufiri portokalli gjatë hover */
+        }
+
+    .text-center {
+        margin-bottom: 20px; /* Distancë poshtë titullit */
+        color: orange; /* Ngjyra e bardhë për titullin */
+    }
+
+    .form-group label {
+        color: white; /* Teksti bardhë për etiketat */
+    }
+
+    .btn-custom {
+        background-color: orange; /* Sfonda portokalli */
+        color: white; /* Teksti bardhë */
+        border: 1px solid orange; /* Kufiri portokalli */
+    }
+
+        .btn-custom:hover {
+            background-color: inherit; /* Sfonda mbetet e njëjtë gjatë hover-it */
+            color: white; /* Teksti mbetet bardhë gjatë hover-it */
+            border: 1px solid orange; /* Kufiri portokalli mbetet i njëjtë gjatë hover-it */
+        }
+
+    .text-danger {
+        color: red; /* Teksti për gabimet mbetet kuq */
+    }
+</style>

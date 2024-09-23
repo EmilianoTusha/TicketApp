@@ -1,0 +1,134 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - CineXperience</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+
+    <style>
+        /* Navbar custom styles */
+        .navbar {
+            background-color: #1c1c1c; /* Sfondi i errët i navbar */
+        }
+
+        .navbar-brand {
+            font-size: 1.5rem; /* Madhësia më e madhe e tekstit */
+            font-weight: 500; /* Trashësia më e madhe e tekstit */
+            font-family: 'Roboto Slab', serif; /* Përdor një font serif elegant */
+            color: #f39c12; /* Ngjyra portokalli e logo-s */
+            text-transform: uppercase; /* Bëj të gjitha shkronjat të jenë të mëdha */
+            letter-spacing: 1px; /* Hapesira mes shkronjave për një pamje më të mirë */
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3); /* Hije e lehtë për theksim */
+            transition: color 0.3s ease, text-shadow 0.3s ease; /* Efekt i butë kur ndryshon ngjyra */
+        }
+
+            .navbar-brand:hover {
+                color: #e67e22; /* Ngjyra portokalli më e errët kur vendoset miu mbi logo */
+                text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); /* Hije më e theksuar kur është hover */
+            }
+
+
+        .nav-link {
+            color: #ecf0f1; /* Ngjyra gri e lehtë e linkeve */
+        }
+
+            .nav-link:hover {
+                color: #e67e22; /* Ngjyra portokalli e linkeve kur vendoset miu mbi to */
+            }
+
+        .dropdown-menu {
+            background-color: #2c2c2c; /* Sfondi gri i errët i menusë dropdown */
+            border: none;
+        }
+
+        .dropdown-item {
+            color: #ecf0f1; /* Ngjyra gri e lehtë e elementëve të menusë */
+        }
+
+            .dropdown-item:hover {
+                background-color: #e67e22; /* Ngjyra portokalli kur vendoset miu mbi elementët e menusë */
+                color: white;
+            }
+
+        .btn-outline-success {
+            border-color: #f39c12; /* Kontur portokalli i butonit të kërkimit */
+            color: #f39c12; /* Teksti portokalli i butonit të kërkimit */
+        }
+
+        .btn-outline-success {
+            background-color: #e67e22; /* Sfond portokalli kur butoni klikohet */
+            color: white; /* Teksti i bardhë mbi sfondin portokalli */
+        }
+
+        /* Sfondi i input-it të kërkimit */
+        .form-control {
+            background-color: #333; /* Sfondi gri i errët i input-it */
+            color: #ecf0f1; /* Teksti gri i lehtë i input-it */
+            border: 1px solid #444; /* Kontur gri i errët i input-it */
+        }
+
+            .form-control::placeholder {
+                color: #7f8c8d; /* Ngjyra gri e errët e placeholder-it */
+            }
+    </style>
+</head>
+<body>
+    <header>
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm">
+            <div class="container-fluid">
+                <a class="navbar-brand" asp-area="" asp-controller="Movies" asp-action="Index">CineXperience</a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+                        aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
+                    <ul class="navbar-nav flex-grow-1">
+                        <li class="nav-item">
+                            <a class="nav-link" asp-area="" asp-controller="Movies" asp-action="Index"><i class="bi bi-film"></i> Movies</a>
+                        </li>
+                        @if (User.Identity.IsAuthenticated && User.IsInRole("Admin"))
+                        {
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    <i class="bi bi-gear"></i> Management
+                                </a>
+
+                                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                    <a class="dropdown-item" asp-controller="Cinemas" asp-action="Index"><i class="bi bi-camera-reels"></i> Cinemas</a>
+                                    <a class="dropdown-item" asp-controller="Producers" asp-action="Index"><i class="bi bi-headset"></i> Producers</a>
+                                    <a class="dropdown-item" asp-controller="Actors" asp-action="Index"><i class="bi bi-person-square"></i> Actors</a>
+                                </div>
+                            </li>
+                        }
+
+                    </ul>
+                    <form class="form-inline my-2 my-lg-0" asp-controller="Movies" asp-action="Filter" style="padding-right: 25px;">
+                        <input name="searchString" type="text" class="form-control" placeholder="Search for a movie..." aria-label="Recipient's username" aria-describedby="button-addon2">
+                        <button class="btn btn-outline-success my-2 my-sm-0" type="submit"><i class="bi bi-search"></i></button>
+                    </form>
+                    <ul class="navbar-nav">
+                        @await Component.InvokeAsync("ShoppingCartSummary")
+                    </ul>
+
+                    <partial name="_Identity.cshtml" />
+
+                </div>
+            </div>
+        </nav>
+    </header>
+    <div class="container-fluid">
+        <main role="main" class="pb-3">
+            @RenderBody()
+        </main>
+    </div>
+
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

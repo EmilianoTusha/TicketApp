@@ -1,0 +1,110 @@
+﻿@using eTickets.Data.ViewModels; 
+@model LoginVM;
+
+@{
+    ViewData["Title"] = "Log in to your account";
+}
+
+<div class="row">
+    <div class="col-md-6 offset-3">
+        <p>
+            <h4 class="login-title">Log in to your account</h4>
+        </p>
+
+        @if (TempData["Error"] != null)
+        {
+            <div class="col-md-12 alert alert-danger">
+                <span><b>Sorry!</b> - @TempData["Error"] </span>
+            </div>
+        }
+
+        <div class="row">
+            <div class="col-md-8 offset-2">
+                <form asp-action="Login">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+                    <div class="form-group">
+                        <label asp-for="EmailAddress" class="control-label"></label>
+                        <input asp-for="EmailAddress" class="form-control input-field" />
+                        <span asp-validation-for="EmailAddress" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Password" class="control-label"></label>
+                        <input asp-for="Password" class="form-control input-field" />
+                        <span asp-validation-for="Password" class="text-danger"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <input class="btn btn-submit float-right" type="submit" value="Log in" />
+                        <a class="btn btn-cancel" asp-controller="Movies" asp-action="Index">Cancel</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    /* Sfondi i zi për të gjithë faqen dhe shkrimi i bardhë */
+    body {
+        background-color: black;
+        color: white; /* Ngjyra e tekstit të bardhë */
+        font-family: Arial, sans-serif; /* Mund të ndryshoni këtë në bazë të preferencave */
+    }
+
+    /* Sfondi i zi për fushat e shkrimit dhe shkrimi i zi */
+    .form-control.input-field {
+        background-color: white; /* Sfondi i bardhë për fushat e shkrimit */
+        color: black; /* Ngjyra e tekstit të zi */
+        border: 1px solid #ddd; /* Kufiri i bardhë për kontrast */
+    }
+
+        .form-control.input-field:focus {
+            border-color: orange; /* Kufiri portokalli për fokus */
+        }
+
+    /* Butoni Log in me sfond portokalli dhe tekst të bardhë */
+    .btn-submit {
+        background-color: orange;
+        color: white;
+        border: none;
+        padding: 10px 20px;
+        border-radius: 0.25rem;
+        font-weight: bold;
+    }
+
+        .btn-submit:hover {
+            background-color: darkorange;
+            color: white;
+        }
+
+    /* Butoni Cancel me sfond të zi dhe tekst të bardhë */
+    .btn-cancel {
+        background-color: black;
+        color: white;
+        border: 1px solid orange; /* Kufiri portokalli për kontrast */
+        padding: 10px 20px;
+        border-radius: 0.25rem;
+        text-decoration: none;
+        font-weight: bold;
+    }
+
+        .btn-cancel:hover {
+            background-color: #333; /* Ngjyra e ndryshuar për hover në buton */
+            color: white;
+        }
+
+    /* Sfondi për mesazhet e gabimeve */
+    .alert-danger {
+        background-color: black;
+        color: orange; /* Ngjyra e tekstit portokalli për mesazhet e gabimeve */
+        border: 1px solid orange; /* Kufiri portokalli për kontrast */
+        padding: 20px;
+        border-radius: 0.5rem;
+    }
+
+    /* Titulli portokalli */
+    .login-title {
+        color: orange; /* Ngjyra portokalli për titujt */
+    }
+</style>

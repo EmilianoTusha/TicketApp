@@ -1,0 +1,108 @@
+﻿@model IEnumerable<Cinema>
+
+@{
+    ViewData["Title"] = "List of Cinemas";
+}
+
+<style>
+    body {
+        background-color: #000000;
+        color: #ffffff;
+    }
+
+    .table {
+        color: #ffffff;
+    }
+
+        .table thead th {
+            background-color: #ff6600;
+            color: #000000;
+        }
+
+        .table tbody td {
+            background-color: #222222;
+            color: #ffffff;
+        }
+
+    .table-hover tbody tr:hover {
+        background-color: #333333;
+    }
+
+    .btn-outline-primary, .btn-outline-info {
+        color: #ffffff;
+        background-color: #ff6600;
+        border-color: #ff6600;
+    }
+
+        .btn-outline-primary:hover, .btn-outline-info:hover {
+            color: #000000;
+            background-color: #ff8800;
+            border-color: #ff8800;
+        }
+
+    .btn-danger {
+        color: #ffffff;
+        background-color: #dc3545;
+        border-color: #dc3545;
+    }
+
+        .btn-danger:hover {
+            color: #000000;
+            background-color: #ff6666;
+            border-color: #ff6666;
+        }
+
+    .text-black {
+        color: #000000 !important;
+    }
+</style>
+
+<div class="row">
+    <div class="col-md-8 offset-md-2">
+        <table class="table table-hover table-striped shadow-sm">
+            <thead class="thead-light">
+                <tr class="text-center">
+                    <th class="text-black">@Html.DisplayNameFor(model => model.Logo)</th>
+                    <th class="text-black">@Html.DisplayNameFor(model => model.Name)</th>
+                    <th class="text-black">@Html.DisplayNameFor(model => model.Description)</th>
+                    @if (User.Identity.IsAuthenticated && User.IsInRole("Admin"))
+                    {
+                        <th class="text-black">Actions</th>
+                    }
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td class="align-middle text-center">
+                            <img class="rounded-circle" src="@item.Logo" alt="@item.Name" style="max-width: 100px" />
+                        </td>
+                        <td class="align-middle text-center">
+                            @Html.DisplayFor(modelItem => item.Name)
+                        </td>
+                        <td class="align-middle">
+                            @Html.DisplayFor(modelItem => item.Description)
+                        </td>
+                        @if (User.Identity.IsAuthenticated && User.IsInRole("Admin"))
+                        {
+                            <td class="align-middle text-center">
+                                <a class="btn btn-outline-primary btn-sm me-1" asp-action="Edit" asp-route-id="@item.Id">
+                                    <i class="bi bi-pencil-square"></i> Edit
+                                </a>
+                                <a class="btn btn-outline-info btn-sm me-1" asp-action="Details" asp-route-id="@item.Id">
+                                    <i class="bi bi-eye"></i> Details
+                                </a>
+                                <a class="btn btn-danger btn-sm text-white" asp-action="Delete" asp-route-id="@item.Id">
+                                    <i class="bi bi-trash"></i> Delete
+                                </a>
+                            </td>
+                        }
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+
+@await Html.PartialAsync("_CreateItem", "Cinemas")
